@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: white; /* White background */
+            text-align: center;
+            padding: 20px;
+            font-size: 14px; /* Smaller overall font size */
+        }
+        .container {
+            max-width: 400px; /* Reduced width to 400px */
+            width: 100%; /* Full width for responsiveness */
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 22px; /* Adjusted font size for header */
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            font-size: 14px; /* Normal font size for labels */
+        }
+        input, select, textarea {
+            width: calc(100% - 20px); /* Adjusted input width */
+            padding: 10px; /* Normal padding for input boxes */
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px; /* Normal font size for inputs */
+        }
+        button {
+            padding: 10px 20px; /* Normal button padding */
+            font-size: 15px; /* Adjusted font size for button */
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .terms-container {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center the checkbox and label */
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .terms-container input {
+            margin-right: 5px;
+        }
+        .terms-container label {
+            margin: 0;
+            font-size: 14px; /* Normal font size for terms */
+        }
+        .terms-container a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 14px; /* Normal font size for links */
+        }
+        .terms-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Create New Account</h1>
+    <p>Please fill in the information below to create your account and set a reminder:</p>
+
+    <!-- Account Information -->
+    <label for="username">Username:</label>
+    <input type="text" id="username" placeholder="Enter your username" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" placeholder="Enter your email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" placeholder="Enter your password" required>
+
+    <label for="confirm-password">Confirm Password:</label>
+    <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+
+    <label for="reminder-time">Set Reminder Time:</label>
+    <input type="time" id="reminder-time" required>
+
+    <!-- New Fields -->
+    <label for="country">What country are you from?</label>
+    <input type="text" id="country" placeholder="Enter your country" required>
+
+    <!-- Terms and Conditions -->
+    <div class="terms-container">
+        <input type="checkbox" id="terms" required>
+        <label for="terms">I agree to the <a href="#">terms and conditions</a>.</label>
+    </div>
+    <div class="terms-container">
+        <!-- Submit Button for Terms -->
+        <button onclick="submitAccount()">Submit</button>
+    </div>
+</div>
+
+<script>
+    function submitAccount() {
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        const reminderTime = document.getElementById('reminder-time').value;
+        const country = document.getElementById('country').value;
+        const terms = document.getElementById('terms').checked;
+
+        if (!username || !email || !password || !confirmPassword || !reminderTime || !country || !terms) {
+            alert("Please fill in all fields and agree to the terms and conditions.");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return;
+        }
+
+        alert(`Account created successfully for ${username}!\nReminder set for ${reminderTime}.\nCountry: ${country}`);
+        // Handle form submission, e.g., send data to a server or save it locally.
+    }
+</script>
+
+</body>
+</html>
+
+
+
