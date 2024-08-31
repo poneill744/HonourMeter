@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honor and Good vs Bad Path Meter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .header-text {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+            padding: 0 20px;
+        }
+        .meter-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 500px;
+            margin-bottom: 20px;
+        }
+        .meter {
+            position: relative;
+            width: 100%;
+            height: 30px;
+            background: black;
+            border-radius: 15px;
+            border: 8px solid black;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .meter-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, darkred 10%, black 50%, white 90%);
+            border-radius: 15px;
+        }
+        .meter-pin {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            border: 2px solid black;
+            transition: left 0.3s ease;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 25px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        .progress {
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color: #fff;
+            border-radius: 25px;
+        }
+        .progress-good {
+            background-color: #4caf50;
+            width: 0%;
+        }
+        .progress-evil {
+            background-color: #f44336;
+            width: 0%;
+        }
+        .input-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            width: 35%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px; /* Space between input and buttons */
+        }
+        .button-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .main-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: black;
+        }
+        #subtract-points-btn {
+            background-color: red;
+            margin-right: 10px;
+        }
+        #add-points-btn {
+            background-color: green;
+            margin-left: 10px;
+        }
+        #options-btn, #settings-btn {
+            background-color: black;
+            margin-left: 5px;
+            border: 1px solid #333; /* Slightly darker border for better visibility */
+        }
+        .small-buttons-container {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        .small-buttons-container button {
+            padding: 5px 10px;
+            font-size: 14px;
+            margin: 5px;
+            border-radius: 5px;
+            color: white;
+        }
+        .sins-btn {
+            background-color: darkred;
+        }
+        .virtues-btn {
+            background-color: green;
+        }
+        #clock {
+            font-size: 24px;
+            margin-top: 10px;
+            color: #333;
+        }
+        .select-all-btn {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
+        #select-all-sins-btn {
+            background-color: darkred;
+            margin-right: 10px;
+        }
+        #select-all-virtues-btn {
+            background-color: green;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-text">
+        Honor is not people pleasing! It's about honesty, fairness, or integrity in one's beliefs and actions: a man of honor.
+    </div>
+    <div id="clock"></div>
+
+    <!-- Honor Meter -->
+    <div class="meter-container">
+        <div class="meter">
+            <div class="meter-background"></div>
+            <div id="meterPin" class="meter-pin"></div>
+        </div>
+        <div class="input-container">
+            <input type="number" id="pointsInput" placeholder="Enter points (+/-)">
+            <button id="options-btn" onclick="showOptions()">Options</button>
+            <button id="settings-btn" onclick="showSettings()">Settings</button>
+        </div>
+        <div class="button-container">
+            <button id="subtract-points-btn" onclick="changeHonor(-parseInt(document.getElementById('pointsInput').value || 0))">Subtract Points to Low Honor</button>
+            <button id="add-points-btn" onclick="changeHonor(parseInt(document.getElementById('pointsInput').value || 0))">Add Points to High Honor</button>
+        </div>
+    </div>
+
+    <!-- Good vs Bad Path Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" style="width: 600px;">
+            <div class="progress progress-good" id="progress-good">Good Path: 0/2500</div>
+        </div>
+        <div class="progress-bar" style="width: 600px;">
+            <div class="progress progress-evil" id="progress-evil">Bad Path: 0/2500</div>
+        </div>
+    </div>
+
+    <!-- Select All Buttons -->
+    <div class="button-container">
+        <button class="select-all-btn" id="select-all-sins-btn" onclick="selectAll('sins')">Select All Sins</button>
+        <button class="select-all-btn" id="select-all-virtues-btn" onclick="selectAll('virtues')">Select All Virtues</button>
+    </div>
+
+    <!-- Honor Meter Sins and Virtues Buttons -->
+    <div class="small-buttons-container">
+        <!-- Common Sins -->
+        <button class="sins-btn" id="lying-btn" onclick="changeHonor(-20)">Lying (-20)</button>
+        <button class="sins-btn" id="stealing-btn" onclick="changeHonor(-25)">Stealing (-25)</button>
+        <button class="sins-btn" id="pride-btn" onclick="changeHonor(-25)">Pride (-25)</button>
+        <button class="sins-btn" id="envy-btn" onclick="changeHonor(-25)">Envy (-25)</button>
+        <button class="sins-btn" id="greed-btn" onclick="changeHonor(-25)">Greed (-25)</button>
+        <button class="sins-btn" id="wrath-btn" onclick="changeHonor(-50)">Anger (Wrath) (-50)</button>
+        <button class="sins-btn" id="gossiping-btn" onclick="changeHonor(-50)">Gossiping (-50)</button>
+        <button class="sins-btn" id="dishonoring-parents-btn" onclick="changeHonor(-100)">Dishonoring Parents (-100)</button>
+        <button class="sins-btn" id="sexual-immorality-btn" onclick="changeHonor(-75)">Sexual Immorality (-75)</button>
+        <button class="sins-btn" id="substance-abuse-btn" onclick="changeHonor(-100)">Substance Abuse (-100)</button>
+    </div>
+    <div class="small-buttons-container">
+        <!-- Common Virtues -->
+        <button class="virtues-btn" id="honesty-btn" onclick="changeHonor(1)">Honesty (+1)</button>
+        <button class="virtues-btn" id="kindness-btn" onclick="changeHonor(1)">Kindness (+1)</button>
+        <button class="virtues-btn" id="generosity-btn" onclick="changeHonor(1)">Generosity (+1)</button>
+        <button class="virtues-btn" id="compassion-btn" onclick="changeHonor(1)">Compassion (+1)</button>
+        <button class="virtues-btn" id="courage-btn" onclick="changeHonor(1)">Courage (+1)</button>
+        <button class="virtues-btn" id="forgiveness-btn" onclick="changeHonor(1)">Forgiveness (+1)</button>
+        <button class="virtues-btn" id="respect-btn" onclick="changeHonor(1)">Respect (+1)</button>
+        <button class="virtues-btn" id="loyalty-btn" onclick="changeHonor(1)">Loyalty (+1)</button>
+        <button class="virtues-btn" id="gratitude-btn" onclick="changeHonor(1)">Gratitude (+1)</button>
+        <button class="virtues-btn" id="responsibility-btn" onclick="changeHonor(1)">Responsibility (+1)</button>
+    </div>
+
+    <audio id="high-honor-sound" src="/mnt/data/High-honor-sound.mp3"></audio>
+    <audio id="low-honor-sound" src="/mnt/data/Low honour.mp3"></audio>
+
+    <script>
+        // Honor and Good vs Bad Path values
+        let honorValue = 0;  // Start in the middle
+        let goodPoints = 0;
+        let evilPoints = 0;
+
+        function changeHonor(points) {
+            honorValue += points;
+            updateMeter();
+
+            if (points > 0) {
+                goodPoints += points;
+                updateProgress('good', goodPoints);
+            } else {
+                evilPoints += Math.abs(points);
+                updateProgress('evil', evilPoints);
+            }
+        }
+
+        function updateMeter() {
+            const meterPin = document.getElementById('meterPin');
+            const meterWidth = document.querySelector('.meter').clientWidth;
+            const newLeft = ((honorValue + 250) / 500) * meterWidth;
+            meterPin.style.left = Math.min(Math.max(newLeft, 0), meterWidth - 20) + 'px';
+        }
+
+        function updateProgress(type, value) {
+            const progressElement = document.getElementById(`progress-${type}`);
+            const maxPoints = 2500;
+            const progressWidth = (value / maxPoints) * 100;
+            progressElement.style.width = Math.min(progressWidth, 100) + '%';
+            progressElement.textContent = `${type === 'good' ? 'Good Path' : 'Bad Path'}: ${value}/${maxPoints}`;
+        }
+
+        function selectAll(type) {
+            const buttons = document.querySelectorAll(type === 'sins' ? '.sins-btn' : '.virtues-btn');
+            buttons.forEach(button => button.click());
+        }
+
+        // Function to update the clock
+        function updateClock() {
+            const now = new Date();
+            const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const formattedDate = now.toLocaleDateString();
+            document.getElementById('clock').textContent = `Date: ${formattedDate} | Time: ${formattedTime}`;
+        }
+
+        // Update clock every second
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Initial meter update to center the pin
+        updateMeter();
+
+        function showOptions() {
+            alert('Options button clicked! Implement your options here.');
+        }
+
+        function showSettings() {
+            alert('Settings button clicked! Implement your settings here.');
+        }
+    </script>
+</body>
+</html>
