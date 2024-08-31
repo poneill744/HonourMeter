@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Light grey background */
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .setting-option {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #28a745; /* Green background */
+            border: 2px solid black; /* Black border around each option */
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .setting-option a {
+            text-decoration: none;
+            color: white; /* White text color */
+            font-size: 18px;
+        }
+        .setting-option:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Settings</h1>
+        <div class="setting-option"><a href="#">Account Settings</a></div>
+        <div class="setting-option"><a href="#">Privacy Settings</a></div>
+        <div class="setting-option"><a href="#">Notification Settings</a></div>
+        <div class="setting-option"><a href="#">Language</a></div>
+        <div class="setting-option"><a href="#">Security Settings</a></div>
+        <div class="setting-option"><a href="#">Data & Storage</a></div>
+        <div class="setting-option"><a href="#">Help & Support</a></div>
+    </div>
+</body>
+</html>
