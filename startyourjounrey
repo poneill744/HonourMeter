@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Honour Journey Journal App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+            color: #333; /* Changed to #333 for better readability */
+        }
+        .header {
+            background-color: #4caf50;
+            color: white;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .content {
+            margin: 20px;
+            padding: 20px;
+            max-width: 600px;
+            background-color: #eee;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .description {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .cta-button {
+            padding: 15px 25px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+        .cta-button:hover {
+            background-color: #45a049;
+        }
+        .auth-links {
+            margin-top: 20px;
+        }
+        .auth-links a {
+            display: block;
+            margin: 5px 0;
+            font-size: 1em;
+            color: #4caf50;
+            text-decoration: none;
+        }
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        My Honour Journey Journal App
+    </div>
+    <div class="content">
+        <div class="description">
+            Welcome to the My Honour Journey Journal App! This app is designed to help you track your personal growth and reflections on your journey of honor and integrity. Here, you can record your achievements, challenges, and the lessons learned along the way.
+        </div>
+
+        <!-- Start Your Journey Button -->
+        <a href="app.html" class="cta-button">Start Your Journey</a>
+
+   
+    </div>
+</body>
+</html>
