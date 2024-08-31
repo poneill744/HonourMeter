@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Honor Meter Buttons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .header-text {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+            padding: 0 20px;
+        }
+        .container {
+            width: 800px; /* Increased width for side-by-side layout */
+        }
+        .edit-section {
+            margin-bottom: 20px;
+        }
+        .edit-section h3 {
+            margin-bottom: 10px;
+        }
+        .edit-section .inputs-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* Space between input fields */
+        }
+        .edit-section .inputs-container div {
+            display: flex;
+            align-items: center;
+            gap: 5px; /* Space between text and number input */
+        }
+        .edit-section input[type="text"], .edit-section input[type="number"] {
+            width: 100px; /* Smaller width for inputs */
+            padding: 5px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .edit-section button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: black;
+            margin: 5px;
+        }
+        .edit-section button:hover {
+            background-color: #333;
+        }
+        .input-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .input-container input {
+            margin-right: 10px;
+        }
+        .button-container {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-text">
+        Customize Honor Meter Button Information
+    </div>
+
+    <div class="container">
+        <!-- Editing Section for Sins -->
+        <div class="edit-section">
+            <h3>Edit Sins</h3>
+            <div class="inputs-container" id="sins-buttons">
+                <!-- Sins inputs -->
+                <div>
+                    <input type="text" id="lying-text" value="Lying">
+                    <input type="number" id="lying-value" value="-20">
+                </div>
+                <div>
+                    <input type="text" id="stealing-text" value="Stealing">
+                    <input type="number" id="stealing-value" value="-25">
+                </div>
+                <div>
+                    <input type="text" id="pride-text" value="Pride">
+                    <input type="number" id="pride-value" value="-25">
+                </div>
+                <div>
+                    <input type="text" id="envy-text" value="Envy">
+                    <input type="number" id="envy-value" value="-25">
+                </div>
+                <div>
+                    <input type="text" id="greed-text" value="Greed">
+                    <input type="number" id="greed-value" value="-25">
+                </div>
+                <div>
+                    <input type="text" id="wrath-text" value="Wrath">
+                    <input type="number" id="wrath-value" value="-50">
+                </div>
+                <div>
+                    <input type="text" id="gossiping-text" value="Gossiping">
+                    <input type="number" id="gossiping-value" value="-50">
+                </div>
+                <div>
+                    <input type="text" id="dishonoring-parents-text" value="Dishonoring Parents">
+                    <input type="number" id="dishonoring-parents-value" value="-100">
+                </div>
+                <div>
+                    <input type="text" id="sexual-immorality-text" value="Sexual Immorality">
+                    <input type="number" id="sexual-immorality-value" value="-75">
+                </div>
+                <div>
+                    <input type="text" id="substance-abuse-text" value="Substance Abuse">
+                    <input type="number" id="substance-abuse-value" value="-100">
+                </div>
+            </div>
+            <button onclick="updateSins()">Update Sins</button>
+        </div>
+
+        <!-- Editing Section for Virtues -->
+        <div class="edit-section">
+            <h3>Edit Virtues</h3>
+            <div class="inputs-container" id="virtues-buttons">
+                <!-- Virtues inputs -->
+                <div>
+                    <input type="text" id="honesty-text" value="Honesty">
+                    <input type="number" id="honesty-value" value="1">
+                </div>
+                <div>
+                    <input type="text" id="kindness-text" value="Kindness">
+                    <input type="number" id="kindness-value" value="1">
+                </div>
+                <div>
+                    <input type="text" id="generosity-text" value="Generosity">
+                    <input type="number" id="generosity-value" value="1">
+                </div>
+                <div>
+                    <input type="text" id="compassion-text" value="Compassion">
+                    <input type="number" id="compassion-value" value="1">
+                </div>
+                <div>
+                    <input type="text" id="courage-text" value="Courage">
+                    <input type="number" id="courage-value" value="1">
+                </div>
+                <div>
+                    <input type="text" id="forgiveness-text" value="Forgiveness">
+                    <input type="number" id="forgiveness-value" value="1">
+                </div>
+                <div>
+                    <input type="text" id="respect-text" value="Respect">
+                    <input type="number" id="respect-value" value="1">
+                </div>
+                <div>
+                    <input type="text" id="loyalty-text" value="Loyalty">
+                    <input type="number" id="loyalty-value" value="1">
+                </div>
+                <div>
+                    <input type="text" id="gratitude-text" value="Gratitude">
+                    <input type="number" id="gratitude-value" value="1">
+                </div>
+                <div>
+                    <input type="text" id="responsibility-text" value="Responsibility">
+                    <input type="number" id="responsibility-value" value="1">
+                </div>
+            </div>
+            <button onclick="updateVirtues()">Update Virtues</button>
+        </div>
+    </div>
+
+    <script>
+        function updateSins() {
+            // Get all sin input values
+            const sins = document.querySelectorAll('#sins-buttons input[type="text"]');
+            const values = document.querySelectorAll('#sins-buttons input[type="number"]');
+            
+            sins.forEach((input, index) => {
+                const buttonId = input.id.replace('-text', '-btn');
+                const value = values[index].value;
+                document.getElementById(buttonId).textContent = `${input.value} (${value})`;
+                document.getElementById(buttonId).setAttribute('onclick', `changeHonor(${value})`);
+            });
+        }
+
+        function updateVirtues() {
+            // Get all virtue input values
+            const virtues = document.querySelectorAll('#virtues-buttons input[type="text"]');
+            const values = document.querySelectorAll('#virtues-buttons input[type="number"]');
+            
+            virtues.forEach((input, index) => {
+                const buttonId = input.id.replace('-text', '-btn');
+                const value = values[index].value;
+                document.getElementById(buttonId).textContent = `${input.value} (+${value})`;
+                document.getElementById(buttonId).setAttribute('onclick', `changeHonor(${value})`);
+            });
+        }
+
+        // Example changeHonor function for testing
+        function changeHonor(points) {
+            alert(`Change honor by ${points} points`);
+        }
+    </script>
+</body>
+</html>
