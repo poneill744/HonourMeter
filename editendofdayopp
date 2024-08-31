@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Sins and Virtues - Honour Journey Journal App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+            color: #333;
+        }
+        .header {
+            background-color: #4caf50;
+            color: white;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .content {
+            margin: 20px;
+            padding: 20px;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .description {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .cta-button {
+            padding: 15px 25px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .cta-button:hover {
+            background-color: #45a049;
+        }
+        .journal-entry {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            text-align: left;
+        }
+        .journal-entry h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .journal-entry textarea {
+            width: calc(100% - 20px);
+            height: 150px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .checklist {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .checklist h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .checklist label {
+            display: block;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            color: Black;
+            font-size: 1em;
+        }
+        .checklist input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: #4caf50;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        .select-all-btn {
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin: 5px;
+        }
+        .select-all-sins-btn {
+            background-color: darkred;
+        }
+        .select-all-sins-btn:hover {
+            background-color: #b30000;
+        }
+        .select-all-virtues-btn {
+            background-color: lightgreen;
+            color: #333;
+        }
+        .select-all-virtues-btn:hover {
+            background-color: #b2ffb2;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Edit Sins and Virtues - Honour Journey Journal App
+    </div>
+
+    <div class="content">
+        <a href="app.html" class="cta-button">Go Back to App</a>
+    </div>
+
+    <div class="journal-entry">
+        <h2>Update Your Sins and Virtues</h2>
+
+        <div class="checklist">
+            <h3>Sins</h3>
+            <label><input type="checkbox" class="sin-checkbox"> <span>Sinned: <input type="text" value="Lying"></span></label>
+            <label><input type="checkbox" class="sin-checkbox"> <span>Sinned: <input type="text" value="Stealing"></span></label>
+            <label><input type="checkbox" class="sin-checkbox"> <span>Sinned: <input type="text" value="Drunk"></span></label>
+            <label><input type="checkbox" class="sin-checkbox"> <span>Sinned: <input type="text" value="Smoked"></span></label>
+            <label><input type="checkbox" class="sin-checkbox"> <span>Sinned: <input type="text" value="Watched Porn"></span></label>
+
+            <h3>Virtues</h3>
+            <label><input type="checkbox" class="virtue-checkbox"> <span>Virtue: <input type="text" value="Honesty"></span></label>
+            <label><input type="checkbox" class="virtue-checkbox"> <span>Virtue: <input type="text" value="Went to the Gym"></span></label>
+            <label><input type="checkbox" class="virtue-checkbox"> <span>Virtue: <input type="text" value="Did My Spanish Lesson"></span></label>
+            <label><input type="checkbox" class="virtue-checkbox"> <span>Virtue: <input type="text" value="Did My Stretches"></span></label>
+            <label><input type="checkbox" class="virtue-checkbox"> <span>Virtue: <input type="text" value="Spent 5 Minutes Praying"></span></label>
+        </div>
+
+        <div class="button-group">
+            <button class="select-all-btn select-all-sins-btn" onclick="selectAll('sins')">Select All Sins</button>
+            <button class="select-all-btn select-all-virtues-btn" onclick="selectAll('virtues')">Select All Virtues</button>
+        </div>
+
+        <button>Save Changes</button>
+    </div>
+
+    <script>
+        // Function to select all checkboxes of a specific type
+        function selectAll(type) {
+            const checkboxes = document.querySelectorAll(type === 'sins' ? '.sin-checkbox' : '.virtue-checkbox');
+            checkboxes.forEach(checkbox => checkbox.checked = true);
+        }
+    </script>
+</body>
+</html>
