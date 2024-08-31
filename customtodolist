@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customizable Milestone To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #milestoneForm {
+            margin-bottom: 20px;
+        }
+        #milestoneForm input, #milestoneForm textarea {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 600px;
+        }
+        #milestoneList ul {
+            list-style: none;
+            padding: 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #milestoneList li {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        textarea {
+            margin-left: 10px;
+            height: 20px;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Customizable Milestone To-Do List</h1>
+    
+    <div id="milestoneForm">
+        <input type="text" id="milestoneText" placeholder="Enter milestone" />
+        <textarea id="milestoneComment" placeholder="Add a comment..."></textarea>
+        <button onclick="addMilestone()">Add Milestone</button>
+    </div>
+
+    <div id="milestoneList">
+        <ul>
+            <!-- Milestones will be added here -->
+        </ul>
+    </div>
+
+    <script>
+        function addMilestone() {
+            var milestoneText = document.getElementById('milestoneText').value.trim();
+            var milestoneComment = document.getElementById('milestoneComment').value.trim();
+
+            if (milestoneText === '') {
+                alert('Please enter a milestone.');
+                return;
+            }
+
+            var ul = document.querySelector('#milestoneList ul');
+            var li = document.createElement('li');
+
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = 'milestone-' + (ul.children.length + 1);
+
+            var label = document.createElement('label');
+            label.setAttribute('for', checkbox.id);
+            label.textContent = milestoneText;
+
+            var commentBox = document.createElement('textarea');
+            commentBox.placeholder = 'Add a comment...';
+            if (milestoneComment) {
+                commentBox.value = milestoneComment;
+            }
+
+            li.appendChild(checkbox);
+            li.appendChild(label);
+            li.appendChild(commentBox);
+
+            ul.appendChild(li);
+
+            // Clear form fields
+            document.getElementById('milestoneText').value = '';
+            document.getElementById('milestoneComment').value = '';
+        }
+    </script>
+</body>
+</html>
