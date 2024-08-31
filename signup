@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Honour Journey Journal App - Introduction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #white;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background-color: #white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome to My Honour Journey Journal App</h1>
+    <p>Please answer the following questions to get started on your journey:</p>
+
+    <!-- Question 1: Sex -->
+    <label for="sex">What is your sex?</label>
+    <select id="sex" required>
+        <option value="">Select...</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+        <option value="Prefer not to say">Prefer not to say</option>
+    </select>
+
+    <!-- Question 2: Name -->
+    <label for="name">What is your name?</label>
+    <input type="text" id="name" placeholder="Enter your name" required>
+
+    <!-- Question 3: Date of Birth -->
+    <label for="dob">What's your date of birth?</label>
+    <input type="date" id="dob" required>
+
+    <!-- Question 4: Faith -->
+    <label for="faith">What is your faith?</label>
+    <select id="faith" required>
+        <option value="">Select...</option>
+        <option value="Christianity">Christianity</option>
+        <option value="Islam">Islam</option>
+        <option value="Hinduism">Hinduism</option>
+        <option value="Buddhism">Buddhism</option>
+        <option value="Judaism">Judaism</option>
+        <option value="Sikhism">Sikhism</option>
+        <option value="Jainism">Jainism</option>
+        <option value="Bahá'í">Bahá'í</option>
+        <option value="Shinto">Shinto</option>
+        <option value="Taoism">Taoism</option>
+        <option value="Confucianism">Confucianism</option>
+        <option value="Zoroastrianism">Zoroastrianism</option>
+        <option value="Custom">Custom (Please specify)</option>
+    </select>
+    <input type="text" id="custom-faith" placeholder="If Custom, please specify" style="display: none;">
+
+    <!-- Question 5: Goals -->
+    <label for="goals">What are your goals?</label>
+    <textarea id="goals" rows="4" placeholder="Describe your goals..." required></textarea>
+
+    <!-- Question 6: Nightmare Life -->
+    <label for="nightmare">What's your nightmare life?</label>
+    <textarea id="nightmare" rows="4" placeholder="Describe your nightmare life..." required></textarea>
+    
+    <!-- New Fields -->
+    <label for="country-code">Mobile number</label>
+    <div style="display: flex; align-items: center;">
+        <select id="country-code" style="flex: 1;">
+            <option value="">Country Code...</option>
+            <option value="+1">+1 (USA/Canada)</option>
+            <option value="+44">+44 (UK)</option>
+            <option value="+33">+33 (France)</option>
+            <option value="+49">+49 (Germany)</option>
+            <option value="+39">+39 (Italy)</option>
+            <option value="+34">+34 (Spain)</option>
+            <option value="+81">+81 (Japan)</option>
+            <option value="+61">+61 (Australia)</option>
+            <option value="+86">+86 (China)</option>
+            <option value="+91">+91 (India)</option>
+            <option value="+55">+55 (Brazil)</option>
+            <option value="+27">+27 (South Africa)</option>
+            <!-- Add more country codes as needed -->
+        </select>
+        <input type="text" id="phone" placeholder="Enter your mobile number" style="flex: 2;">
+    </div>
+
+    <!-- Submit Button -->
+    <button onclick="submitAnswers()">Submit</button>
+</div>
+
+<script>
+    document.getElementById('faith').addEventListener('change', function() {
+        const customFaithInput = document.getElementById('custom-faith');
+        if (this.value === 'Custom') {
+            customFaithInput.style.display = 'block';
+        } else {
+            customFaithInput.style.display = 'none';
+        }
+    });
+
+    function submitAnswers() {
+        const sex = document.getElementById('sex').value;
+        const name = document.getElementById('name').value;
+        const dob = document.getElementById('dob').value;
+        const faith = document.getElementById('faith').value;
+        const customFaith = document.getElementById('custom-faith').value;
+        const goals = document.getElementById('goals').value;
+        const nightmare = document.getElementById('nightmare').value;
+        const countryCode = document.getElementById('country-code').value;
+        const phone = document.getElementById('phone').value;
+
+        if (!sex || !name || !dob || !faith || !goals || !nightmare || !countryCode || !phone) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        const selectedFaith = faith === 'Custom' ? customFaith : faith;
+
+        alert(`Thank you, ${name}! Your responses have been recorded.`);
+        // You can handle the responses as needed, e.g., save them or use them in the app.
+    }
+</script>
+
+</body>
+</html>
