@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100 Milestones To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        li {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        textarea {
+            margin-left: 10px;
+            width: 300px;
+            height: 20px;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>100 Milestones To-Do List</h1>
+    <ul>
+        <!-- List Items -->
+        <li><input type="checkbox" id="milestone1"> <label for="milestone1">Birth</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone2"> <label for="milestone2">First smile</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone3"> <label for="milestone3">First steps</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone4"> <label for="milestone4">First words</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone5"> <label for="milestone5">First day of school</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone6"> <label for="milestone6">Learning to ride a bike</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone7"> <label for="milestone7">Graduation from elementary school</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone8"> <label for="milestone8">Getting a pet</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone9"> <label for="milestone9">First sleepover</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone10"> <label for="milestone10">Graduation from middle school</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone11"> <label for="milestone11">First job</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone12"> <label for="milestone12">Driving a car</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone13"> <label for="milestone13">Graduation from high school</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone14"> <label for="milestone14">Going to college</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone15"> <label for="milestone15">First serious relationship</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone16"> <label for="milestone16">First apartment</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone17"> <label for="milestone17">Graduation from college</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone18"> <label for="milestone18">First full-time job</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone19"> <label for="milestone19">Getting married</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone20"> <label for="milestone20">Having a first child</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone21"> <label for="milestone21">Buying a house</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone22"> <label for="milestone22">Career advancement</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone23"> <label for="milestone23">Child's first steps</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone24"> <label for="milestone24">Child's first words</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone25"> <label for="milestone25">Child’s first day of school</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone26"> <label for="milestone26">Children's graduation from school</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone27"> <label for="milestone27">Becoming a grandparent</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone28"> <label for="milestone28">Retirement</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone29"> <label for="milestone29">Traveling abroad for the first time</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone30"> <label for="milestone30">Learning a new language</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone31"> <label for="milestone31">Starting a hobby</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone32"> <label for="milestone32">Buying a car</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone33"> <label for="milestone33">Attending a major event (e.g., concert, sports)</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone34"> <label for="milestone34">Making a significant investment</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone35"> <label for="milestone35">Completing a major project or goal</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone36"> <label for="milestone36">Writing a book or article</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone37"> <label for="milestone37">Receiving an award or recognition</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone38"> <label for="milestone38">Hosting a significant event (e.g., wedding, party)</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone39"> <label for="milestone39">Starting a business</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone40"> <label for="milestone40">Making a major career change</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone41"> <label for="milestone41">Achieving a personal fitness goal</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone42"> <label for="milestone42">Completing a marathon or similar challenge</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone43"> <label for="milestone43">Learning a new skill or craft</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone44"> <label for="milestone44">Building or renovating a home</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone45"> <label for="milestone45">Volunteering or giving back to the community</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone46"> <label for="milestone46">Starting a family tradition</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone47"> <label for="milestone47">Learning to play a musical instrument</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone48"> <label for="milestone48">Attending a cultural or historical event</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone49"> <label for="milestone49">Making a significant lifestyle change</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone50"> <label for="milestone50">Purchasing a major item (e.g., property, car)</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone51"> <label for="milestone51">Experiencing a major life transition (e.g., moving, job change)</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone52"> <label for="milestone52">Participating in a community project</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone53"> <label for="milestone53">Achieving financial independence</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone54"> <label for="milestone54">Receiving professional certification or degree</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone55"> <label for="milestone55">Visiting a new country or city</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone56"> <label for="milestone56">Hosting an international guest</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone57"> <label for="milestone57">Engaging in lifelong learning</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone58"> <label for="milestone58">Creating a personal or family archive</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone59"> <label for="milestone59">Finding a mentor or being a mentor</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone60"> <label for="milestone60">Participating in a major research project</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone61"> <label for="milestone61">Achieving a personal dream or ambition</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone62"> <label for="milestone62">Building a legacy or charitable fund</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone63"> <label for="milestone63">Exploring new career opportunities</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone64"> <label for="milestone64">Starting or expanding a business</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone65"> <label for="milestone65">Contributing to a significant cultural or social cause</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone66"> <label for="milestone66">Receiving an honorary title or position</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone67"> <label for="milestone67">Achieving a significant personal breakthrough</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone68"> <label for="milestone68">Becoming a public figure or speaker</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone69"> <label for="milestone69">Publishing a work of fiction or non-fiction</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone70"> <label for="milestone70">Creating a major artistic or creative work</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone71"> <label for="milestone71">Establishing a scholarship or grant</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone72"> <label for="milestone72">Participating in a high-profile public event</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone73"> <label for="milestone73">Celebrating a major anniversary or milestone</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone74"> <label for="milestone74">Reaching a major personal or professional goal</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone75"> <label for="milestone75">Contributing to a major scientific discovery</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone76"> <label for="milestone76">Leading a major initiative or campaign</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone77"> <label for="milestone77">Receiving a prestigious award or recognition</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone78"> <label for="milestone78">Making a significant cultural impact</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone79"> <label for="milestone79">Launching a successful product or service</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone80"> <label for="milestone80">Completing a personal or professional challenge</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone81"> <label for="milestone81">Building a successful team or organization</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone82"> <label for="milestone82">Establishing a lasting partnership or collaboration</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone83"> <label for="milestone83">Creating a major innovation or technology</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone84"> <label for="milestone84">Achieving financial stability or success</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone85"> <label for="milestone85">Participating in a major philanthropic effort</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone86"> <label for="milestone86">Mentoring the next generation</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone87"> <label for="milestone87">Writing a personal memoir</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone88"> <label for="milestone88">Achieving a high level of expertise in a field</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone89"> <label for="milestone89">Making a significant impact in one's community</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone90"> <label for="milestone90">Leading a significant research initiative</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone91"> <label for="milestone91">Receiving a major industry award</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone92"> <label for="milestone92">Achieving international recognition</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone93"> <label for="milestone93">Creating a lasting legacy in a chosen field</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone94"> <label for="milestone94">Building a renowned reputation</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone95"> <label for="milestone95">Leaving a lasting impact on society</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone96"> <label for="milestone96">Creating a major cultural or societal shift</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone97"> <label for="milestone97">Mentoring or inspiring others to achieve greatness</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone98"> <label for="milestone98">Achieving personal fulfillment and happiness</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone99"> <label for="milestone99">Contributing to a major global cause</label><textarea placeholder="Add a comment..."></textarea></li>
+        <li><input type="checkbox" id="milestone100"> <label for="milestone100">Reflecting on a lifetime of achievements</label><textarea placeholder="Add a comment..."></textarea></li>
+    </ul>
+</body>
+</html>
