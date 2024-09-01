@@ -137,6 +137,14 @@
         .select-all-virtues-btn:hover {
             background-color: #b2ffb2;
         }
+        /* Style for the Back button */
+        .back-button {
+            background-color: grey;
+            color: white;
+        }
+        .back-button:hover {
+            background-color: #666;
+        }
     </style>
 </head>
 <body>
@@ -173,6 +181,9 @@
         </div>
         
         <button>Save Journal Entry</button>
+        
+        <!-- Back button with grey color -->
+        <button class="back-button" onclick="history.back()">Back</button>
     </div>
 
     <script>
