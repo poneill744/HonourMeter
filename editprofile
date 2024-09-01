@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Profile page of John Doe, a web developer based in New York, USA.">
+    <meta name="keywords" content="web developer, John Doe, profile, New York">
+    <meta name="author" content="John Doe">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .profile-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .profile-header img {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            margin-right: 20px;
+            transition: transform 0.3s;
+        }
+        .profile-header img:hover {
+            transform: scale(1.05);
+        }
+        .profile-header input {
+            margin: 0;
+            font-size: 2em;
+            color: #333;
+            border: none;
+            background: none;
+        }
+        .profile-header p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .section textarea, .section input {
+            font-size: 1em;
+            color: #666;
+            border: none;
+            background: none;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .section textarea {
+            border-bottom: 1px solid #ddd;
+        }
+        .contact-info input {
+            font-size: 1em;
+            color: #666;
+            border: none;
+            background: none;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+        .contact-info a {
+            display: none; /* Hide links while editing */
+        }
+        .button-group {
+            display: flex;
+            gap: 10px; /* Space between buttons */
+        }
+        .save-button, .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .save-button {
+            background-color: #4caf50;
+        }
+        .save-button:hover {
+            background-color: #45a049;
+        }
+        .back-button {
+            background-color: #f44336;
+        }
+        .back-button:hover {
+            background-color: #e53935;
+        }
+        .change-photo-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #2196f3;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .change-photo-btn:hover {
+            background-color: #1976d2;
+        }
+        .hidden {
+            display: none;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-container {
+                width: 90%;
+            }
+            .profile-header img {
+                width: 100px;
+                height: 100px;
+            }
+            .profile-header input {
+                font-size: 1.5em;
+            }
+            .profile-header p {
+                font-size: 0.9em;
+            }
+            .section h2 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <img id="profile-pic" src="profile-pic.jpg" alt="John Doe's profile picture">
+            <div>
+                <input type="text" id="name" value="John Doe">
+                <input type="text" id="title" value="Web Developer">
+                <input type="text" id="location" value="Based in New York, USA">
+                <button class="change-photo-btn" onclick="document.getElementById('photo-input').click();">Change Photo</button>
+                <input type="file" id="photo-input" class="hidden" accept="image/*" onchange="previewPhoto(event)">
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>About Me</h2>
+            <textarea id="about-me" rows="4">Hello! I'm John, a passionate web developer with a love for creating intuitive and dynamic web applications. I have experience in various technologies including HTML, CSS, JavaScript, and more.</textarea>
+        </div>
+        
+        <div class="section contact-info">
+            <h2>Contact Information</h2>
+            <input type="text" id="email" value="john.doe@example.com" placeholder="Email">
+            <input type="text" id="phone" value="+1234567890" placeholder="Phone">
+            <input type="text" id="linkedin" value="linkedin.com/in/johndoe" placeholder="LinkedIn">
+            <input type="text" id="github" value="github.com/johndoe" placeholder="GitHub">
+        </div>
+        
+        <div class="section">
+            <h2>Bio</h2>
+            <textarea id="bio" rows="4">I graduated with a degree in Computer Science and have been working in the tech industry for over 5 years. I enjoy tackling complex problems and learning new technologies to stay ahead in the ever-evolving tech landscape.</textarea>
+        </div>
+        
+        <div class="button-group">
+            <a href="#" class="save-button" onclick="saveChanges(); return false;">Save Changes</a>
+            <a href="settings.html" class="back-button">Back to Options</a>
+        </div>
+    </div>
+
+    <script>
+        function previewPhoto(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const profilePic = document.getElementById('profile-pic');
+                profilePic.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function saveChanges() {
+            // Example: Save changes to local storage or send to server
+            alert('Changes have been saved.');
+            // Here you might want to collect data and send it to a server or save it locally
+        }
+    </script>
+</body>
+</html>
