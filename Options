@@ -52,6 +52,7 @@
         <div class="option"><a href="#">Edit Options</a></div>
          <div class="option"><a href="#">To do list</a></div>
         <div class="option"><a href="#">End of Day Journal</a></div>
+        <div class="option"><a href="#">View profile</a></div>
         <div class="option"><a href="#">Settings</a></div>
         <div class="option"><a href="#">Log Out</a></div>
     </div>
