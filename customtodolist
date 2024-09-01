@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Metadata about the character encoding and viewport settings for mobile responsiveness -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customizable Milestone To-Do List</title>
     <style>
+        /* Styling for the entire body of the document */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 20px;
         }
+
+        /* Center-aligned heading */
         h1 {
             text-align: center;
         }
+
+        /* Margin settings for the form containing input fields and buttons */
         #milestoneForm {
             margin-bottom: 20px;
         }
+
+        /* Uniform styling for input fields and textarea */
         #milestoneForm input, #milestoneForm textarea {
             display: block;
             margin-bottom: 10px;
             width: 100%;
             max-width: 600px;
         }
+
+        /* Styling the list to be non-bulleted and centered */
         #milestoneList ul {
             list-style: none;
             padding: 0;
             max-width: 600px;
             margin: 0 auto;
         }
+
+        /* Styling for each list item */
         #milestoneList li {
             display: flex;
             align-items: center;
@@ -35,9 +47,13 @@
             padding: 5px;
             border-bottom: 1px solid #ddd;
         }
+
+        /* Styling the checkboxes */
         input[type="checkbox"] {
             margin-right: 10px;
         }
+
+        /* Styling the textarea used for comments */
         textarea {
             margin-left: 10px;
             height: 20px;
@@ -46,21 +62,36 @@
     </style>
 </head>
 <body>
+    <!-- Main heading for the page -->
     <h1>Customizable Milestone To-Do List</h1>
     
+    <!-- Form to add a new milestone -->
     <div id="milestoneForm">
+        <!-- Text input field for entering the milestone title -->
         <input type="text" id="milestoneText" placeholder="Enter milestone" />
+
+        <!-- Textarea for adding comments associated with the milestone -->
         <textarea id="milestoneComment" placeholder="Add a comment..."></textarea>
+
+        <!-- Button to trigger the function that adds the milestone -->
         <button onclick="addMilestone()">Add Milestone</button>
+
+        <!-- Save button to save milestones to localStorage -->
+        <button onclick="saveMilestones()">Save</button>
+
+        <!-- Back button to go back to the previous page -->
+        <button onclick="goBack()">Back</button>
     </div>
 
+    <!-- Container for the list of milestones -->
     <div id="milestoneList">
         <ul>
-            <!-- Milestones will be added here -->
+            <!-- Milestones will be dynamically added here -->
         </ul>
     </div>
 
     <script>
+        // Function to add a new milestone to the list
         function addMilestone() {
             var milestoneText = document.getElementById('milestoneText').value.trim();
             var milestoneComment = document.getElementById('milestoneComment').value.trim();
@@ -83,6 +114,7 @@
 
             var commentBox = document.createElement('textarea');
             commentBox.placeholder = 'Add a comment...';
+
             if (milestoneComment) {
                 commentBox.value = milestoneComment;
             }
@@ -90,13 +122,68 @@
             li.appendChild(checkbox);
             li.appendChild(label);
             li.appendChild(commentBox);
-
             ul.appendChild(li);
 
-            // Clear form fields
             document.getElementById('milestoneText').value = '';
             document.getElementById('milestoneComment').value = '';
         }
+
+        // Function to save milestones to localStorage
+        function saveMilestones() {
+            var ul = document.querySelector('#milestoneList ul');
+            var milestones = [];
+
+            ul.querySelectorAll('li').forEach(function(li) {
+                var checkbox = li.querySelector('input[type="checkbox"]');
+                var label = li.querySelector('label').textContent;
+                var comment = li.querySelector('textarea').value;
+
+                milestones.push({
+                    text: label,
+                    comment: comment,
+                    completed: checkbox.checked
+                });
+            });
+
+            localStorage.setItem('milestones', JSON.stringify(milestones));
+            alert('Milestones saved successfully!');
+        }
+
+        // Function to go back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+
+        // Function to load milestones from localStorage
+        function loadMilestones() {
+            var savedMilestones = localStorage.getItem('milestones');
+            if (savedMilestones) {
+                var milestones = JSON.parse(savedMilestones);
+                var ul = document.querySelector('#milestoneList ul');
+
+                milestones.forEach(function(milestone) {
+                    var li = document.createElement('li');
+
+                    var checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.checked = milestone.completed;
+
+                    var label = document.createElement('label');
+                    label.textContent = milestone.text;
+
+                    var commentBox = document.createElement('textarea');
+                    commentBox.value = milestone.comment;
+
+                    li.appendChild(checkbox);
+                    li.appendChild(label);
+                    li.appendChild(commentBox);
+                    ul.appendChild(li);
+                });
+            }
+        }
+
+        // Load milestones from localStorage when the page is loaded
+        window.onload = loadMilestones;
     </script>
 </body>
 </html>
