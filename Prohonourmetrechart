@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honor and Good vs Bad Actions Graph</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        canvas {
+            width: 100%;
+            height: 400px;
+        }
+        .input-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            width: 35%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: black;
+        }
+        #subtract-points-btn {
+            background-color: red;
+            margin-right: 10px;
+        }
+        #add-points-btn {
+            background-color: green;
+            margin-left: 10px;
+        }
+        #options-btn, #settings-btn, #life-plan-btn {
+            background-color: black;
+            margin-left: 5px;
+            border: 1px solid #333;
+        }
+        .button-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .small-buttons-container {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        .small-buttons-container button {
+            padding: 5px 10px;
+            font-size: 14px;
+            margin: 5px;
+            border-radius: 5px;
+            color: white;
+        }
+        .sins-btn {
+            background-color: darkred;
+        }
+        .virtues-btn {
+            background-color: green;
+        }
+        #clock {
+            font-size: 24px;
+            margin-top: 10px;
+            color: #333;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Good and Bad Actions Over Time</h1>
+        <canvas id="actionsChart"></canvas>
+        
+        <div class="input-container">
+            <input type="number" id="pointsInput" placeholder="Enter points (+/-)">
+            <button id="options-btn" onclick="showOptions()">Options</button>
+            <button id="settings-btn" onclick="showSettings()">Settings</button>
+            <button id="life-plan-btn" onclick="showLifePlan()">Lifeplan</button>
+        </div>
+        <div class="button-container">
+            <button id="subtract-points-btn" onclick="changeHonor(-parseInt(document.getElementById('pointsInput').value || 0))">Subtract Points to Low Honor</button>
+            <button id="add-points-btn" onclick="changeHonor(parseInt(document.getElementById('pointsInput').value || 0))">Add Points to High Honor</button>
+        </div>
+
+        <!-- Honor Meter Sins and Virtues Buttons -->
+        <div class="small-buttons-container">
+            <!-- Common Sins -->
+            <button class="sins-btn" id="lying-btn" onclick="changeHonor(-20)">Lying (-20)</button>
+            <button class="sins-btn" id="stealing-btn" onclick="changeHonor(-25)">Stealing (-25)</button>
+            <button class="sins-btn" id="pride-btn" onclick="changeHonor(-25)">Pride (-25)</button>
+            <button class="sins-btn" id="envy-btn" onclick="changeHonor(-25)">Envy (-25)</button>
+            <button class="sins-btn" id="greed-btn" onclick="changeHonor(-25)">Greed (-25)</button>
+            <button class="sins-btn" id="wrath-btn" onclick="changeHonor(-50)">Anger (Wrath) (-50)</button>
+            <button class="sins-btn" id="gossiping-btn" onclick="changeHonor(-50)">Gossiping (-50)</button>
+            <button class="sins-btn" id="dishonoring-parents-btn" onclick="changeHonor(-100)">Dishonoring Parents (-100)</button>
+            <button class="sins-btn" id="sexual-immorality-btn" onclick="changeHonor(-75)">Sexual Immorality (-75)</button>
+            <button class="sins-btn" id="substance-abuse-btn" onclick="changeHonor(-100)">Substance Abuse (-100)</button>
+        </div>
+        <div class="small-buttons-container">
+            <!-- Common Virtues -->
+            <button class="virtues-btn" id="honesty-btn" onclick="changeHonor(1)">Honesty (+1)</button>
+            <button class="virtues-btn" id="kindness-btn" onclick="changeHonor(1)">Kindness (+1)</button>
+            <button class="virtues-btn" id="generosity-btn" onclick="changeHonor(1)">Generosity (+1)</button>
+            <button class="virtues-btn" id="compassion-btn" onclick="changeHonor(1)">Compassion (+1)</button>
+            <button class="virtues-btn" id="courage-btn" onclick="changeHonor(1)">Courage (+1)</button>
+            <button class="virtues-btn" id="forgiveness-btn" onclick="changeHonor(1)">Forgiveness (+1)</button>
+            <button class="virtues-btn" id="respect-btn" onclick="changeHonor(1)">Respect (+1)</button>
+            <button class="virtues-btn" id="loyalty-btn" onclick="changeHonor(1)">Loyalty (+1)</button>
+            <button class="virtues-btn" id="gratitude-btn" onclick="changeHonor(1)">Gratitude (+1)</button>
+            <button class="virtues-btn" id="responsibility-btn" onclick="changeHonor(1)">Responsibility (+1)</button>
+        </div>
+
+        <div id="clock"></div>
+    </div>
+
+    <script>
+        // Data for the graph
+        const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        let goodActions = Array(12).fill(0);
+        let badActions = Array(12).fill(0);
+
+        // Create the chart
+        const ctx = document.getElementById('actionsChart').getContext('2d');
+        const actionsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Good Actions',
+                        data: goodActions,
+                        borderColor: 'green',
+                        backgroundColor: 'rgba(0, 255, 0, 0.2)',
+                        fill: true,
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Bad Actions',
+                        data: badActions,
+                        borderColor: 'red',
+                        backgroundColor: 'rgba(255, 0, 0, 0.2)',
+                        fill: true,
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Months'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Number of Actions'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.raw;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Function to update chart data
+        function updateChartData() {
+            actionsChart.data.datasets[0].data = goodActions;
+            actionsChart.data.datasets[1].data = badActions;
+            actionsChart.update();
+        }
+
+        // Honor and Good vs Bad Path values
+        let honorValue = 0; 
+        const maxPoints = 2500;
+
+        function changeHonor(points) {
+            honorValue += points;
+            const monthIndex = new Date().getMonth(); // Get current month index
+            if (points > 0) {
+                goodActions[monthIndex] += points;
+            } else {
+                badActions[monthIndex] += Math.abs(points);
+            }
+            updateChartData();
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const formattedDate = now.toLocaleDateString();
+            document.getElementById('clock').textContent = `Date: ${formattedDate} | Time: ${formattedTime}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        function showOptions() {
+            alert('Options button clicked! Implement your options here.');
+        }
+
+        function showSettings() {
+            alert('Settings button clicked! Implement your settings here.');
+        }
+
+        function showLifePlan() {
+            alert('Lifeplan button clicked! Implement your lifeplan options here.');
+        }
+    </script>
+</body>
+</html>
