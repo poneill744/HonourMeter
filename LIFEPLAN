@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Plan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            flex-grow: 1;
+        }
+        .back-button, .save-button {
+            padding: 10px 15px;
+            font-size: 16px;
+            color: #fff;
+            border: 2px solid black; /* Black border for buttons */
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-left: 10px;
+        }
+        .back-button {
+            background-color: #007bff;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+        .save-button {
+            background-color: #28a745;
+        }
+        .save-button:hover {
+            background-color: #218838;
+        }
+        .age-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 2px solid black; /* Black border for the section */
+            border-radius: 8px;
+        }
+        .age-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .month-checkboxes {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .month-checkboxes label {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        .month-checkboxes input[type="checkbox"] {
+            border: 2px solid black; /* Black border for checkboxes */
+            border-radius: 3px;
+            margin-right: 8px;
+        }
+        .tasks {
+            margin-top: 10px;
+        }
+        .task-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            border: 2px solid black; /* Black border for task items */
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .task-item input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        .edit-button, .add-task-button, .delete-task-button {
+            margin-left: 10px;
+            border: 2px solid black; /* Black border for task action buttons */
+            border-radius: 5px;
+            padding: 5px;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        .task-actions {
+            margin-top: 10px;
+        }
+        .task-actions input[type="text"] {
+            margin-right: 10px;
+            border: 2px solid black; /* Black border for text input */
+            border-radius: 3px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Life Plan: From 13 to 35 Years</h1>
+        <a href="index.html" class="back-button">Back</a> <!-- Update the href to the desired URL -->
+        <button class="save-button" onclick="saveData()">Save</button>
+    </div>
+    <p>Track your progress by checking off each month and managing basic tasks for each year. Remember to take your time, keep your tasks simple, plans can change, don't be too hard on yourself, and enjoy the journey.</p>
+
+    <!-- Loop from 13 to 35 years -->
+    <script>
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        let basicTasks = [
+            "Reflect on the past year and set new resolutions.",
+            "Stay physically active and eat healthily."
+        ];
+
+        function renderPage() {
+            for (let age = 13; age <= 35; age++) {
+                document.body.innerHTML += `
+                    <div class="age-section">
+                        <div class="age-header">Age ${age}</div>
+                        <div class="month-checkboxes">
+                            ${months.map(month => `<label><input type="checkbox"> ${month}</label>`).join('')}
+                        </div>
+                        <div class="tasks">
+                            <strong>Basic Tasks:</strong>
+                            <div id="tasks-${age}">
+                                ${basicTasks.map((task, index) => `
+                                    <div class="task-item">
+                                        <input type="checkbox"> 
+                                        <span id="task-${age}-${index}">${task}</span>
+                                        <button class="edit-button" onclick="editTask(${age}, ${index})">Edit</button>
+                                        <button class="delete-task-button" onclick="deleteTask(${age}, ${index})">Delete</button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="task-actions">
+                                <input type="text" id="new-task-${age}" placeholder="New task">
+                                <button class="add-task-button" onclick="addTask(${age})">Add Task</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function editTask(age, index) {
+            const taskSpan = document.getElementById(`task-${age}-${index}`);
+            const newTask = prompt('Edit task:', taskSpan.textContent);
+            if (newTask !== null) {
+                taskSpan.textContent = newTask;
+            }
+        }
+
+        function deleteTask(age, index) {
+            const taskDiv = document.getElementById(`task-${age}-${index}`).parentElement;
+            taskDiv.remove();
+        }
+
+        function addTask(age) {
+            const newTaskInput = document.getElementById(`new-task-${age}`);
+            const newTask = newTaskInput.value.trim();
+            if (newTask) {
+                const taskDiv = document.createElement('div');
+                taskDiv.className = 'task-item';
+                const taskIndex = document.querySelectorAll(`#tasks-${age} .task-item`).length; // Get the next task index
+                taskDiv.innerHTML = `
+                    <input type="checkbox"> 
+                    <span id="task-${age}-${taskIndex}">${newTask}</span>
+                    <button class="edit-button" onclick="editTask(${age}, ${taskIndex})">Edit</button>
+                    <button class="delete-task-button" onclick="deleteTask(${age}, ${taskIndex})">Delete</button>
+                `;
+                document.getElementById(`tasks-${age}`).appendChild(taskDiv);
+                newTaskInput.value = ''; // Clear the input field
+            }
+        }
+
+        function saveData() {
+            alert("Data saved successfully!"); // Placeholder for save functionality
+        }
+
+        renderPage();
+    </script>
+</body>
+</html>
