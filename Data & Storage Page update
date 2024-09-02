@@ -118,6 +118,7 @@
         <h1>Data & Storage</h1>
         <div class="setting-option" onclick="showBubble('manage-data')">Manage Data</div>
         <div class="setting-option" onclick="showBubble('storage-management')">Storage Management</div>
+        <div class="setting-option" onclick="showBubble('email-storage')">Email Storage</div>
     </div>
 
     <!-- Bubbles for editing settings -->
@@ -132,6 +133,13 @@
         <button class="close-btn" onclick="closeBubble('storage-management')">&times;</button>
         <h2>Storage Management</h2>
         <input type="text" placeholder="Storage management details...">
+        <button>Save Changes</button>
+    </div>
+
+    <div id="email-storage" class="bubble">
+        <button class="close-btn" onclick="closeBubble('email-storage')">&times;</button>
+        <h2>Email Storage</h2>
+        <input type="text" placeholder="Email storage settings...">
         <button>Save Changes</button>
     </div>
 
