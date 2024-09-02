@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Light grey background */
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* Ensure bubbles position correctly */
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .setting-option {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #28a745; /* Green background */
+            border: 2px solid black; /* Black border */
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            color: white; /* White text color for green boxes */
+        }
+        .setting-option a {
+            text-decoration: none;
+            color: white; /* White text color for links in green boxes */
+            font-size: 18px;
+        }
+        .setting-option:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+        .bubble {
+            display: none; /* Initially hidden */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background: white;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .bubble h2 {
+            color: #333; /* Darker color for headings inside bubble */
+            margin-top: 0;
+        }
+        .bubble textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .bubble button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .bubble button:hover {
+            background-color: #218838;
+        }
+        .bubble .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #28a745;
+        }
+        .bubble .close-btn:hover {
+            color: #218838;
+        }
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        .back-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <a href="settings.html" class="back-btn">Back</a>
+    <div class="container">
+        <h1>Help & Support</h1>
+        <div class="setting-option" onclick="showBubble('contact-support')">Contact Support</div>
+        <div class="setting-option" onclick="showBubble('faq')">FAQ</div>
+        <div class="setting-option" onclick="showBubble('feedback')">Feedback</div>
+    </div>
+
+    <!-- Bubbles for editing settings -->
+    <div id="contact-support" class="bubble">
+        <button class="close-btn" onclick="closeBubble('contact-support')">&times;</button>
+        <h2>Contact Support</h2>
+        <textarea placeholder="Describe your issue or question..."></textarea>
+        <button>Send Request</button>
+    </div>
+
+    <div id="faq" class="bubble">
+        <button class="close-btn" onclick="closeBubble('faq')">&times;</button>
+        <h2>FAQ</h2>
+        <p>Frequently Asked Questions will be listed here.</p>
+    </div>
+
+    <div id="feedback" class="bubble">
+        <button class="close-btn" onclick="closeBubble('feedback')">&times;</button>
+        <h2>Feedback</h2>
+        <textarea placeholder="Provide your feedback..."></textarea>
+        <button>Submit Feedback</button>
+    </div>
+
+    <script>
+        function showBubble(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function closeBubble(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+    </script>
+</body>
+</html>
