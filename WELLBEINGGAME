@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Well-being Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        h1 {
+            color: #333;
+        }
+        .section {
+            margin: 20px 0;
+            width: 100%;
+            text-align: left;
+        }
+        .button {
+            display: block;
+            padding: 10px 20px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            text-align: left;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .button:hover {
+            opacity: 0.8;
+        }
+        .button.heart { background-color: #FF6F6F; }
+        .button.body { background-color: #4CAF50; }
+        .button.soul { background-color: #2196F3; }
+        .button.spirit { background-color: #FFC107; }
+        .button.mind { background-color: #9C27B0; }
+        .button.click-all { background-color: #000; }
+        .button.click-section { background-color: #333; }
+        .button.edit { background-color: #555; }
+        .button:active {
+            transform: scale(0.98);
+        }
+        .score {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .progress-container {
+            width: 100%;
+            height: 60px; /* Adjusted height for visibility */
+            background-color: #ddd;
+            border-radius: 4px;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .emoji {
+            position: absolute;
+            bottom: 0;
+            font-size: 40px; /* Size of the emoji */
+            transition: left 0.5s; /* Smooth movement */
+        }
+        .edit-mode .tasks .edit-task {
+            display: block;
+            width: calc(100% - 22px); /* Adjusted width to fit within container */
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .edit-mode .tasks .task-btn {
+            display: none; /* Hide buttons in edit mode */
+        }
+        .tasks .edit-task {
+            display: none; /* Hide text fields by default */
+        }
+        .tasks .task-btn {
+            display: block; /* Show buttons by default */
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Well-being Game</h1>
+        <div class="score">Total Score: <span id="score">0</span></div>
+
+        <div class="controls">
+            <button class="button click-all" onclick="clickAllTasks()">Click All Tasks</button>
+            <button class="button edit" onclick="toggleEditMode()">Edit</button>
+        </div>
+
+        <!-- Heart Section -->
+        <div class="section" id="heart-section">
+            <h2>Heart ᯓᡣ𐭩</h2>
+            <div class="tasks">
+                <button class="button heart task-btn" data-task="Practice Self-Care" onclick="updateProgress('heart')">Practice Self-Care</button>
+                <button class="button heart task-btn" data-task="Express Emotions" onclick="updateProgress('heart')">Express Emotions</button>
+                <button class="button heart task-btn" data-task="Build Healthy Relationships" onclick="updateProgress('heart')">Build Healthy Relationships</button>
+                <input type="text" class="edit-task" data-section="heart" data-index="0" value="Practice Self-Care">
+                <input type="text" class="edit-task" data-section="heart" data-index="1" value="Express Emotions">
+                <input type="text" class="edit-task" data-section="heart" data-index="2" value="Build Healthy Relationships">
+            </div>
+            <div class="progress-container">
+                <div class="emoji" id="heart-emoji">ᯓᡣ𐭩</div>
+                <div class="progress-bar" id="heart-bar">0%</div>
+            </div>
+            <button class="button click-section heart" onclick="clickSection('heart')">Click All Heart Tasks</button>
+        </div>
+
+        <!-- Body Section -->
+        <div class="section" id="body-section">
+            <h2>Body ❚█══█❚</h2>
+            <div class="tasks">
+                <button class="button body task-btn" data-task="Exercise for 30 Minutes" onclick="updateProgress('body')">Exercise for 30 Minutes</button>
+                <button class="button body task-btn" data-task="Eat a Healthy Meal" onclick="updateProgress('body')">Eat a Healthy Meal</button>
+                <button class="button body task-btn" data-task="Drink 8 Glasses of Water" onclick="updateProgress('body')">Drink 8 Glasses of Water</button>
+                <input type="text" class="edit-task" data-section="body" data-index="0" value="Exercise for 30 Minutes">
+                <input type="text" class="edit-task" data-section="body" data-index="1" value="Eat a Healthy Meal">
+                <input type="text" class="edit-task" data-section="body" data-index="2" value="Drink 8 Glasses of Water">
+            </div>
+            <div class="progress-container">
+                <div class="emoji" id="body-emoji">❚█══█❚</div>
+                <div class="progress-bar" id="body-bar">0%</div>
+            </div>
+            <button class="button click-section body" onclick="clickSection('body')">Click All Body Tasks</button>
+        </div>
+
+        <!-- Soul Section -->
+        <div class="section" id="soul-section">
+            <h2>Soul 𓆩ꨄ︎𓆪</h2>
+            <div class="tasks">
+                <button class="button soul task-btn" data-task="Set a Personal Goal" onclick="updateProgress('soul')">Set a Personal Goal</button>
+                <button class="button soul task-btn" data-task="Engage in a Passion Project" onclick="updateProgress('soul')">Engage in a Passion Project</button>
+                <button class="button soul task-btn" data-task="Practice Meditation" onclick="updateProgress('soul')">Practice Meditation</button>
+                <input type="text" class="edit-task" data-section="soul" data-index="0" value="Set a Personal Goal">
+                <input type="text" class="edit-task" data-section="soul" data-index="1" value="Engage in a Passion Project">
+                <input type="text" class="edit-task" data-section="soul" data-index="2" value="Practice Meditation">
+            </div>
+            <div class="progress-container">
+                <div class="emoji" id="soul-emoji">𓆩ꨄ︎𓆪</div>
+                <div class="progress-bar" id="soul-bar">0%</div>
+            </div>
+            <button class="button click-section soul" onclick="clickSection('soul')">Click All Soul Tasks</button>
+        </div>
+
+        <!-- Spirit Section -->
+        <div class="section" id="spirit-section">
+            <h2>Spirit ᕙ(  •̀ ᗜ •́  )ᕗ</h2>
+            <div class="tasks">
+                <button class="button spirit task-btn" data-task="Spend Time in Nature" onclick="updateProgress('spirit')">Spend Time in Nature</button>
+                <button class="button spirit task-btn" data-task="Participate in a Community Activity" onclick="updateProgress('spirit')">Participate in a Community Activity</button>
+                <button class="button spirit task-btn" data-task="Reflect on Your Values" onclick="updateProgress('spirit')">Reflect on Your Values</button>
+                <input type="text" class="edit-task" data-section="spirit" data-index="0" value="Spend Time in Nature">
+                <input type="text" class="edit-task" data-section="spirit" data-index="1" value="Participate in a Community Activity">
+                <input type="text" class="edit-task" data-section="spirit" data-index="2" value="Reflect on Your Values">
+            </div>
+            <div class="progress-container">
+                <div class="emoji" id="spirit-emoji">ᕙ(  •̀ ᗜ •́  )ᕗ</div>
+                <div class="progress-bar" id="spirit-bar">0%</div>
+            </div>
+            <button class="button click-section spirit" onclick="clickSection('spirit')">Click All Spirit Tasks</button>
+        </div>
+
+        <!-- Mind Section -->
+        <div class="section" id="mind-section">
+            <h2>Mind ⎚-⎚</h2>
+            <div class="tasks">
+                <button class="button mind task-btn" data-task="Read a Book" onclick="updateProgress('mind')">Read a Book</button>
+                <button class="button mind task-btn" data-task="Solve a Puzzle" onclick="updateProgress('mind')">Solve a Puzzle</button>
+                <button class="button mind task-btn" data-task="Learn a New Skill" onclick="updateProgress('mind')">Learn a New Skill</button>
+                <input type="text" class="edit-task" data-section="mind" data-index="0" value="Read a Book">
+                <input type="text" class="edit-task" data-section="mind" data-index="1" value="Solve a Puzzle">
+                <input type="text" class="edit-task" data-section="mind" data-index="2" value="Learn a New Skill">
+            </div>
+            <div class="progress-container">
+                <div class="emoji" id="mind-emoji">⎚-⎚</div>
+                <div class="progress-bar" id="mind-bar">0%</div>
+            </div>
+            <button class="button click-section mind" onclick="clickSection('mind')">Click All Mind Tasks</button>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        const progress = {
+            heart: 0,
+            body: 0,
+            soul: 0,
+            spirit: 0,
+            mind: 0,
+        };
+        const maxProgress = 1000;
+        const clickPerSection = 3; // Number of clicks per section
+
+        function updateProgress(section) {
+            if (progress[section] < maxProgress) {
+                progress[section]++;
+                score++;
+                document.getElementById('score').innerText = score;
+
+                // Update the progress bar and emoji position for the specific section
+                const progressBar = document.getElementById(`${section}-bar`);
+                const emoji = document.getElementById(`${section}-emoji`);
+                const percentage = (progress[section] / maxProgress) * 100;
+
+                // Calculate the gradient stops based on the percentage
+                let colorStop;
+                if (percentage <= 20) {
+                    colorStop = `linear-gradient(to right, #FF6F6F ${percentage}%, #FF6F6F ${percentage}%)`;
+                } else if (percentage <= 60) {
+                    colorStop = `linear-gradient(to right, #FF6F6F 20%, #FFFF00 ${percentage}%, #FFFF00 ${percentage}%)`;
+                } else {
+                    colorStop = `linear-gradient(to right, #FF6F6F 20%, #FFFF00 40%, #4CAF50 ${percentage}%, #4CAF50 ${percentage}%)`;
+                }
+
+                progressBar.style.background = colorStop;
+                progressBar.style.width = `${percentage}%`;
+                progressBar.innerText = `${Math.round(percentage)}%`;
+
+                // Update emoji position
+                emoji.style.left = `${percentage}%`;
+            }
+        }
+
+        function clickAllTasks() {
+            // Simulate 3 clicks per section (total 15 clicks)
+            for (const section in progress) {
+                for (let i = 0; i < clickPerSection; i++) {
+                    if (progress[section] < maxProgress) {
+                        updateProgress(section);
+                    }
+                }
+            }
+        }
+
+        function clickSection(section) {
+            // Simulate clicking all tasks for the specified section (3 clicks)
+            for (let i = 0; i < clickPerSection; i++) {
+                if (progress[section] < maxProgress) {
+                    updateProgress(section);
+                }
+            }
+        }
+
+        function toggleEditMode() {
+            const gameContainer = document.querySelector('.game-container');
+            const isEditing = gameContainer.classList.toggle('edit-mode');
+            const editButton = document.querySelector('.button.edit');
+            editButton.innerText = isEditing ? 'Save' : 'Edit';
+
+            // Save edited task texts
+            if (!isEditing) {
+                document.querySelectorAll('.tasks').forEach(taskSection => {
+                    taskSection.querySelectorAll('.edit-task').forEach((input, index) => {
+                        const section = input.getAttribute('data-section');
+                        const taskButton = taskSection.querySelector(`.task-btn:nth-of-type(${index + 1})`);
+                        taskButton.innerText = input.value;
+                    });
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
