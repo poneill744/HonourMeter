@@ -53,6 +53,6 @@
         <div class="setting-option"><a href="#">Security Settings</a></div>
         <div class="setting-option"><a href="#">Data & Storage</a></div>
         <div class="setting-option"><a href="#">Help & Support</a></div>
+         <div class="setting-option"><a href="#">Back</a></div>
     </div>
 </body>
-</html>
