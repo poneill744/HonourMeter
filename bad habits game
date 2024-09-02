@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bad Habits Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        h1 {
+            color: #333;
+        }
+        .section {
+            margin: 20px 0;
+            width: 100%;
+            text-align: left;
+        }
+        .button {
+            display: block;
+            padding: 10px 20px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            text-align: left;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .button:hover {
+            opacity: 0.8;
+        }
+        .button.body { background-color: #FF6F6F; }
+        .button.mind { background-color: #2196F3; }
+        .button.social { background-color: #FFC107; }
+        .button.financial { background-color: #9C27B0; }
+        .button.environment { background-color: #4CAF50; }
+        .button.click-all { background-color: #000; }
+        .button.edit { background-color: #555; }
+        .button:active {
+            transform: scale(0.98);
+        }
+        .score {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .progress-container {
+            width: 100%;
+            height: 60px; /* Adjusted height for visibility */
+            background-color: #ddd;
+            border-radius: 4px;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .emoji {
+            position: absolute;
+            bottom: 0;
+            font-size: 40px; /* Size of the emoji */
+            transition: left 0.5s; /* Smooth movement */
+        }
+        .edit-mode .tasks .edit-task {
+            display: block;
+            width: calc(100% - 22px); /* Adjusted width to fit within container */
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .edit-mode .tasks .task-btn {
+            display: none; /* Hide buttons in edit mode */
+        }
+        .tasks .edit-task {
+            display: none; /* Hide text fields by default */
+        }
+        .tasks .task-btn {
+            display: block; /* Show buttons by default */
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Bad Habits Game</h1>
+        <div class="score">Total Score: <span id="score">0</span></div>
+        <div class="controls">
+            <button class="button click-all" onclick="clickAllTasks()">Click All Tasks</button>
+            <button class="button edit" onclick="toggleEditMode()">Edit</button>
+        </div>
+
+        <!-- Body Section -->
+        <div class="section" id="body-section">
+            <h2>Body ❚█══█❚</h2>
+            <div class="tasks">
+                <button class="button body task-btn" data-task="Skip Exercise" onclick="updateProgress('body')">Skip Exercise</button>
+                <button class="button body task-btn" data-task="Eat Junk Food" onclick="updateProgress('body')">Eat Junk Food</button>
+                <button class="button body task-btn" data-task="Sleep Less than 4 Hours" onclick="updateProgress('body')">Sleep Less than 4 Hours</button>
+                <input type="text" class="edit-task" data-section="body" data-index="0" value="Skip Exercise">
+                <input type="text" class="edit-task" data-section="body" data-index="1" value="Eat Junk Food">
+                <input type="text" class="edit-task" data-section="body" data-index="2" value="Sleep Less than 4 Hours">
+            </div>
+            <div class="progress-container">
+                <div class="emoji" id="body-emoji">❚█══█❚</div>
+                <div class="progress-bar" id="body-bar">0%</div>
+            </div>
+            <button class="button click-section body" onclick="clickSection('body')">Click All Body Tasks</button>
+        </div>
+
+        <!-- Mind Section -->
+        <div class="section" id="mind-section">
+            <h2>Mind ⎚-⎚</h2>
+            <div class="tasks">
+                <button class="button mind task-btn" data-task="Procrastinate" onclick="updateProgress('mind')">Procrastinate</button>
+                <button class="button mind task-btn" data-task="Watch Too Much TV" onclick="updateProgress('mind')">Watch Too Much TV/Videogame (over 30minutes)</button>
+                <button class="button mind task-btn" data-task="Ignore Learning Opportunities" onclick="updateProgress('mind')">Ignore Learning Opportunities</button>
+                <input type="text" class="edit-task" data-section="mind" data-index="0" value="Procrastinate">
+                <input type="text" class="edit-task" data-section="mind" data-index="1" value="Watch Too Much TV">
+                <input type="text" class="edit-task" data-section="mind" data-index="2" value="Ignore Learning Opportunities">
+            </div>
+            <div class="progress-container">
+                <div class="emoji" id="mind-emoji">⎚-⎚</div>
+                <div class="progress-bar" id="mind-bar">0%</div>
+            </div>
+            <button class="button click-section mind" onclick="clickSection('mind')">Click All Mind Tasks</button>
+        </div>
+
+        <!-- Social Section -->
+        <div class="section" id="social-section">
+            <h2>Social 🚫👥</h2>
+            <div class="tasks">
+                <button class="button social task-btn" data-task="Avoid Friends" onclick="updateProgress('social')">Avoid Friends</button>
+                <button class="button social task-btn" data-task="Gossip About Others" onclick="updateProgress('social')">Gossip About Others</button>
+                <button class="button social task-btn" data-task="Ignore Family" onclick="updateProgress('social')">Ignore Family</button>
+                <input type="text" class="edit-task" data-section="social" data-index="0" value="Avoid Friends">
+                <input type="text" class="edit-task" data-section="social" data-index="1" value="Gossip About Others">
+                <input type="text" class="edit-task" data-section="social" data-index="2" value="Ignore Family">
+            </div>
+            <div class="progress-container">
+                <div class="emoji" id="social-emoji">🚫👥</div>
+                <div class="progress-bar" id="social-bar">0%</div>
+            </div>
+            <button class="button click-section social" onclick="clickSection('social')">Click All Social Tasks</button>
+        </div>
+
+        <!-- Financial Section -->
+        <div class="section" id="financial-section">
+            <h2>Financial 💸</h2>
+            <div class="tasks">
+                <button class="button financial task-btn" data-task="Spend Impulsively" onclick="updateProgress('financial')">Spend Impulsively</button>
+                <button class="button financial task-btn" data-task="Ignore Savings" onclick="updateProgress('financial')">Ignore Savings</button>
+                <button class="button financial task-btn" data-task="Pile Up Debt" onclick="updateProgress('financial')">Pile Up Debt</button>
+                <input type="text" class="edit-task" data-section="financial" data-index="0" value="Spend Impulsively">
+                <input type="text" class="edit-task" data-section="financial" data-index="1" value="Ignore Savings">
+                <input type="text" class="edit-task" data-section="financial" data-index="2" value="Pile Up Debt">
+            </div>
+            <div class="progress-container">
+                <div class="emoji" id="financial-emoji">💸</div>
+                <div class="progress-bar" id="financial-bar">0%</div>
+            </div>
+            <button class="button click-section financial" onclick="clickSection('financial')">Click All Financial Tasks</button>
+        </div>
+
+        <!-- Environment Section -->
+        <div class="section" id="environment-section">
+            <h2>Environment 🚯</h2>
+            <div class="tasks">
+                <button class="button environment task-btn" data-task="Waste Water" onclick="updateProgress('environment')">Waste Water</button>
+                <button class="button environment task-btn" data-task="Litter" onclick="updateProgress('environment')">Litter</button>
+                <button class="button environment task-btn" data-task="Ignore Recycling" onclick="updateProgress('environment')">Ignore Recycling</button>
+                <input type="text" class="edit-task" data-section="environment" data-index="0" value="Waste Water">
+                <input type="text" class="edit-task" data-section="environment" data-index="1" value="Litter">
+                <input type="text" class="edit-task" data-section="environment" data-index="2" value="Ignore Recycling">
+            </div>
+            <div class="progress-container">
+                <div class="emoji" id="environment-emoji">🚯</div>
+                <div class="progress-bar" id="environment-bar">0%</div>
+            </div>
+            <button class="button click-section environment" onclick="clickSection('environment')">Click All Environment Tasks</button>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        const progress = {
+            body: 0,
+            mind: 0,
+            social: 0,
+            financial: 0,
+            environment: 0
+        };
+
+        function updateProgress(section) {
+            score += 1;
+            progress[section] += 1;
+            document.getElementById('score').textContent = score;
+            document.getElementById(section + '-bar').textContent = progress[section] * 10 + '%';
+            document.getElementById(section + '-emoji').style.left = progress[section] * 10 + '%';
+        }
+
+        function clickAllTasks() {
+            document.querySelectorAll('.task-btn').forEach(btn => btn.click());
+        }
+
+        function clickSection(section) {
+            document.querySelectorAll(`.${section}.task-btn`).forEach(btn => btn.click());
+        }
+
+        function toggleEditMode() {
+            const gameContainer = document.querySelector('.game-container');
+            gameContainer.classList.toggle('edit-mode');
+        }
+    </script>
+</body>
+</html>
