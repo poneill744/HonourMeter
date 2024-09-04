@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discipline vs. Hedonism Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .section {
+            margin: 20px 0;
+            width: 100%;
+            text-align: left;
+        }
+        .button {
+            display: block;
+            padding: 10px 20px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            text-align: left;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .button:hover {
+            opacity: 0.8;
+        }
+        .button.discipline { background-color: #4CAF50; }
+        .button.hedonism { background-color: #FF6F6F; }
+        .button.click-all { background-color: #000; }
+        .button.edit { background-color: #555; }
+        .button:active {
+            transform: scale(0.98);
+        }
+        .score {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .progress-container {
+            width: 100%;
+            height: 60px;
+            background-color: #ddd;
+            border-radius: 4px;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .emoji {
+            position: absolute;
+            bottom: 0;
+            font-size: 40px;
+            transition: left 0.5s;
+        }
+        .edit-mode .tasks .edit-task {
+            display: block;
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .edit-mode .tasks .task-btn {
+            display: none;
+        }
+        .tasks .edit-task {
+            display: none;
+        }
+        .tasks .task-btn {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Discipline vs. Hedonism Game</h1>
+        <div class="score">Total Score: <span id="score">0</span></div>
+        <div class="controls">
+            <button class="button click-all" onclick="clickAllTasks()">Click All Tasks</button>
+            <button class="button edit" onclick="toggleEditMode()">Edit</button>
+        </div>
+
+        <!-- Discipline Section -->
+        <div class="section" id="discipline-section">
+            <h2>Discipline 🌟</h2>
+            <div class="tasks">
+                <button class="button discipline task-btn" data-task="Exercise for 30 Minutes" onclick="updateProgress('discipline', 10)">Exercise for 30 Minutes</button>
+                <button class="button discipline task-btn" data-task="Read a Book" onclick="updateProgress('discipline', 5)">Read a Book</button>
+                <button class="button discipline task-btn" data-task="Meditate for 10 Minutes" onclick="updateProgress('discipline', 7)">Meditate for 10 Minutes</button>
+                <input type="text" class="edit-task" data-section="discipline" data-index="0" value="Exercise for 30 Minutes">
+                <input type="text" class="edit-task" data-section="discipline" data-index="1" value="Read a Book">
+                <input type="text" class="edit-task" data-section="discipline" data-index="2" value="Meditate for 10 Minutes">
+            </div>
+            <div class="progress-container">
+                <div class="emoji" id="discipline-emoji">🌟</div>
+                <div class="progress-bar" id="discipline-bar">0%</div>
+            </div>
+            <button class="button click-section discipline" onclick="clickSection('discipline')">Click All Discipline Tasks</button>
+        </div>
+
+        <!-- Hedonism Section -->
+        <div class="section" id="hedonism-section">
+            <h2>Hedonism 🍰</h2>
+            <div class="tasks">
+                <button class="button hedonism task-btn" data-task="Eat Junk Food" onclick="updateProgress('hedonism', -5)">Eat Junk Food</button>
+                <button class="button hedonism task-btn" data-task="Binge Watch TV Shows" onclick="updateProgress('hedonism', -7)">Binge Watch TV Shows</button>
+                <button class="button hedonism task-btn" data-task="Oversleep" onclick="updateProgress('hedonism', -3)">Oversleep</button>
+                <input type="text" class="edit-task" data-section="hedonism" data-index="0" value="Eat Junk Food">
+                <input type="text" class="edit-task" data-section="hedonism" data-index="1" value="Binge Watch TV Shows">
+                <input type="text" class="edit-task" data-section="hedonism" data-index="2" value="Oversleep">
+            </div>
+            <div class="progress-container">
+                <div class="emoji" id="hedonism-emoji">🍰</div>
+                <div class="progress-bar" id="hedonism-bar">0%</div>
+            </div>
+            <button class="button click-section hedonism" onclick="clickSection('hedonism')">Click All Hedonism Tasks</button>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        const progress = {
+            discipline: 0,
+            hedonism: 0
+        };
+
+        function updateProgress(section, points) {
+            score += points;
+            progress[section] += points;
+            document.getElementById('score').textContent = score;
+            document.getElementById(section + '-bar').textContent = Math.abs(progress[section]) + '%';
+            document.getElementById(section + '-emoji').style.left = (progress[section] + 100) / 2 + '%';
+        }
+
+        function clickAllTasks() {
+            document.querySelectorAll('.task-btn').forEach(btn => btn.click());
+        }
+
+        function clickSection(section) {
+            document.querySelectorAll(`.${section}.task-btn`).forEach(btn => btn.click());
+        }
+
+        function toggleEditMode() {
+            const gameContainer = document.querySelector('.game-container');
+            gameContainer.classList.toggle('edit-mode');
+        }
+    </script>
+</body>
+</html>
