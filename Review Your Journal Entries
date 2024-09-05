@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Your Journal Entries - <span id="month-year">Current Month</span></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+            color: #333;
+        }
+        .header {
+            background-color: #4caf50;
+            color: white;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .content {
+            max-width: 800px;
+            height: 600px; /* Adjust height to fit your needs */
+            overflow-y: scroll; /* Enable vertical scrolling */
+            background-color: #fff;
+            padding: 10px; /* Reduced padding */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .entry {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px; /* Reduced padding */
+            margin-bottom: 10px; /* Reduced margin */
+        }
+        .entry h3 {
+            font-size: 1.2em; /* Reduced font size */
+            margin-bottom: 5px;
+        }
+        .entry p {
+            font-size: 1em; /* Reduced font size */
+            line-height: 1.4; /* Adjust line height */
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: #4caf50;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .reset-button {
+            background-color: darkred;
+        }
+        .reset-button:hover {
+            background-color: #b30000;
+        }
+        /* Style for new buttons */
+        .review-monthly-score-btn {
+            background-color: #FF5722;
+        }
+        .review-monthly-score-btn:hover {
+            background-color: #E64A19;
+        }
+        .end-of-day-btn {
+            background-color: #2196F3;
+        }
+        .end-of-day-btn:hover {
+            background-color: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Review Your Journal Entries - <span id="month-year">Current Month</span>
+    </div>
+
+    <div class="content" id="journal-entries">
+        <!-- Journal entries will be displayed here -->
+    </div>
+
+    <button id="edit-entry-button" onclick="editEntry()">Edit Entry</button>
+    <button id="email-toggle-button" onclick="toggleEmailSetting()">Automatically send to email ON</button>
+    
+    <!-- New buttons added -->
+    <button class="review-monthly-score-btn">Review Monthly Score</button>
+    <button class="end-of-day-btn">End of Day</button>
+
+    <script>
+        // Function to get the current month and year
+        function getMonthYear() {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long' };
+            return now.toLocaleDateString('en-US', options);
+        }
+
+        // Update the title and header with the current month and year
+        document.addEventListener('DOMContentLoaded', () => {
+            const monthYear = getMonthYear();
+            document.getElementById('month-year').textContent = monthYear;
+            document.title = `Review Your Journal Entries - ${monthYear}`;
+        });
+
+        // Sample data to simulate stored journal entries
+        const journalEntries = [];
+        for (let i = 1; i <= 14; i++) {
+            journalEntries.push({
+                date: `2024-09-${i < 10 ? '0' : ''}${i} 14:30`,
+                content: `Journal entry for 2024-09-${i < 10 ? '0' : ''}${i}. This is a sample entry for demonstration purposes.`
+            });
+        }
+
+        // Variable to track email setting
+        let emailAutoSend = true; // Default state is ON
+
+        // Function to display journal entries
+        function displayJournalEntries() {
+            const container = document.getElementById('journal-entries');
+            container.innerHTML = ''; // Clear existing content
+
+            journalEntries.forEach((entry, index) => {
+                const entryDiv = document.createElement('div');
+                entryDiv.classList.add('entry');
+
+                const entryTitle = document.createElement('h3');
+                entryTitle.textContent = `Date: ${entry.date}`;
+                entryDiv.appendChild(entryTitle);
+
+                const entryContent = document.createElement('p');
+                entryContent.textContent = entry.content;
+                entryDiv.appendChild(entryContent);
+
+                container.appendChild(entryDiv);
+            });
+        }
+
+        // Function to simulate editing an entry
+        function editEntry() {
+            const entryIndex = prompt("Enter the entry number to edit (1, 2, 3...):");
+            if (entryIndex && entryIndex > 0 && entryIndex <= journalEntries.length) {
+                const newContent = prompt("Edit your journal entry:", journalEntries[entryIndex - 1].content);
+                if (newContent) {
+                    journalEntries[entryIndex - 1].content = newContent;
+                    displayJournalEntries();
+                }
+            } else {
+                alert("Invalid entry number.");
+            }
+        }
+
+        // Function to toggle email auto-send setting
+        function toggleEmailSetting() {
+            emailAutoSend = !emailAutoSend; // Toggle the boolean value
+
+            // Update button text based on the current state
+            const button = document.getElementById('email-toggle-button');
+            button.textContent = emailAutoSend ? "Automatically send to email ON" : "Automatically send to email OFF";
+        }
+
+        // Initial call to display entries
+        displayJournalEntries();
+    </script>
+</body>
+</html>
