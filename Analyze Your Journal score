@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyze Your Journal - <span id="month-year">Current Month</span></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+            color: #333;
+        }
+        .header {
+            background-color: #4caf50;
+            color: white;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .content {
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .section p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: #4caf50;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .reset-button {
+            background-color: darkred;
+        }
+        .reset-button:hover {
+            background-color: #b30000;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Analyze Your Journal - <span id="month-year">Current Month</span>
+    </div>
+
+    <div class="content">
+        <div class="section" id="sin-analysis">
+            <h3>Sins Analysis</h3>
+            <p>Total times Lying: <span id="lying-count">0</span></p>
+            <p>Total times Stealing: <span id="stealing-count">0</span></p>
+            <p>Total times Drunk: <span id="drunk-count">0</span></p>
+            <p>Total times Smoked: <span id="smoked-count">0</span></p>
+            <p>Total times Watched Porn: <span id="porn-count">0</span></p>
+        </div>
+
+        <div class="section" id="virtue-analysis">
+            <h3>Virtues Analysis</h3>
+            <p>Total times Honesty: <span id="honesty-count">0</span></p>
+            <p>Total times Went to the Gym: <span id="gym-count">0</span></p>
+            <p>Total times Did My Spanish Lesson: <span id="spanish-count">0</span></p>
+            <p>Total times Did My Stretches: <span id="stretches-count">0</span></p>
+            <p>Total times Spent 5 Minutes Praying: <span id="praying-count">0</span></p>
+        </div>
+
+        <button id="review-entries-button" onclick="reviewEntries()">Review Your Journal Entries</button>
+        <button id="end-of-day-button" onclick="endOfDay()">End of Day</button>
+    </div>
+
+    <script>
+        // Function to get the current month and year
+        function getMonthYear() {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long' };
+            return now.toLocaleDateString('en-US', options);
+        }
+
+        // Update the title and header with the current month and year
+        document.addEventListener('DOMContentLoaded', () => {
+            const monthYear = getMonthYear();
+            document.getElementById('month-year').textContent = monthYear;
+            document.title = `Analyze Your Journal - ${monthYear}`;
+        });
+
+        // Sample data for the last 28 days (In a real app, this would come from your backend or local storage)
+        const data = {
+            sins: { lying: 10, stealing: 3, drunk: 5, smoked: 2, porn: 8 },
+            virtues: { honesty: 15, gym: 7, spanish: 10, stretches: 12, praying: 20 }
+        };
+
+        // Function to display analysis data
+        function displayData() {
+            document.getElementById('lying-count').textContent = data.sins.lying;
+            document.getElementById('stealing-count').textContent = data.sins.stealing;
+            document.getElementById('drunk-count').textContent = data.sins.drunk;
+            document.getElementById('smoked-count').textContent = data.sins.smoked;
+            document.getElementById('porn-count').textContent = data.sins.porn;
+
+            document.getElementById('honesty-count').textContent = data.virtues.honesty;
+            document.getElementById('gym-count').textContent = data.virtues.gym;
+            document.getElementById('spanish-count').textContent = data.virtues.spanish;
+            document.getElementById('stretches-count').textContent = data.virtues.stretches;
+            document.getElementById('praying-count').textContent = data.virtues.praying;
+        }
+
+        // Function to handle review entries button click
+        function reviewEntries() {
+            alert("Review Your Journal Entries button clicked!");
+        }
+
+        // Function to handle end of day button click
+        function endOfDay() {
+            alert("End of Day button clicked!");
+        }
+
+        // Initialize the data display
+        displayData();
+    </script>
+</body>
+</html>
+
