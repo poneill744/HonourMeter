@@ -107,6 +107,7 @@
             color: white;
             background-color: #4caf50;
             transition: background-color 0.3s;
+            margin: 5px;
         }
         button:hover {
             background-color: #45a049;
@@ -145,6 +146,19 @@
         .back-button:hover {
             background-color: #666;
         }
+        /* Style for the new buttons */
+        .review-journal-btn {
+            background-color: #2196F3;
+        }
+        .review-journal-btn:hover {
+            background-color: #1976D2;
+        }
+        .review-monthly-score-btn {
+            background-color: #FF5722;
+        }
+        .review-monthly-score-btn:hover {
+            background-color: #E64A19;
+        }
     </style>
 </head>
 <body>
@@ -179,8 +193,10 @@
             <button class="select-all-btn select-all-sins-btn" onclick="selectAll('sins')">Select All Sins</button>
             <button class="select-all-btn select-all-virtues-btn" onclick="selectAll('virtues')">Select All Virtues</button>
         </div>
-        
+
         <button>Save Journal Entry</button>
+        <button class="review-journal-btn">Review Your Journal Entries</button>
+        <button class="review-monthly-score-btn">Review Monthly Score</button>
         
         <!-- Back button with grey color -->
         <button class="back-button" onclick="history.back()">Back</button>
